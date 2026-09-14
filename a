@@ -1,0 +1,18 @@
+[33mcommit 057d3a02c482f785767756c4d0c9774f35eb8905[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31mapileituraintegrada/main[m[33m)[m
+Merge: 8991823 2094adc
+Author: Leonardo <deamorimsilvagabriell@gmail.com>
+Date:   Mon Sep 14 10:44:39 2026 -0300
+
+    Merge branch 'main' of github.com:Leonardo-Amorim-007/API-Leitura-integrada with local project
+
+[33mcommit 8991823d6e04eaf186d38aa247958feae590bdff[m
+Author: Leonardo <deamorimsilvagabriell@gmail.com>
+Date:   Mon Sep 14 10:31:29 2026 -0300
+
+    Enviando para o github
+
+[33mcommit 2094adc78a9ec7f44f287526e1200353b0e78e3a[m
+Author: Leonardo <85557928+Leonardo-Amorim-007@users.noreply.github.com>
+Date:   Mon Sep 14 09:56:45 2026 -0300
+
+    Initial commit

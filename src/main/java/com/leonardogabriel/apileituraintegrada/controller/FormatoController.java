@@ -34,4 +34,9 @@ public class FormatoController {
         return service.consultarObra(id);
     }
 
+    @DeleteMapping
+    public String deletarFormato (@RequestBody Formato formato) {
+        service.deletarFormato(formato);
+        return "Formato deletado com sucesso!";
+    }
 }

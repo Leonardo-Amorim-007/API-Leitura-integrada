@@ -33,6 +33,16 @@ public class FormatoService {
 
         Formato formato = repository.findById(novoFormato.getId()).orElseThrow(() -> new IllegalArgumentException("Id inválido!"));
         formato.setFormato(novoFormato.getFormato());
+
         repository.save(formato);
+    }
+
+    public void deletarFormato (Formato formato) {
+        Formato formato2 = repository.findById(formato.getId()).orElseThrow(() -> new IllegalArgumentException("Id inválido"));
+
+        if (!formato.getFormato().equalsIgnoreCase(formato2.getFormato()))
+            throw new IllegalArgumentException("O formato é inválido para exclusão!");
+
+        repository.delete(formato);
     }
 }
