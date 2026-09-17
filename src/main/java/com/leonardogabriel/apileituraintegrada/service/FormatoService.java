@@ -12,7 +12,7 @@ public class FormatoService {
     public FormatoService (FormatoRepository repository) {this.repository = repository;}
 
     public void cadastrarFormato (Formato formato) {
-        if (formato.verificar())
+        if (!formato.verificar())
             throw new IllegalArgumentException("O formato foi enviado incorretamente!");
         if (repository.existsByFormato(formato.getFormato()))
             throw new IllegalArgumentException("O Formato já foi cadastrado");
@@ -28,7 +28,7 @@ public class FormatoService {
     }
 
     public void alterarFormato (Formato novoFormato) {
-        if (novoFormato.verificar())
+        if (!novoFormato.verificar())
             throw new IllegalArgumentException("O formato foi enviado incorretamente");
 
         Formato formato = repository.findById(novoFormato.getId()).orElseThrow(() -> new IllegalArgumentException("Id inválido!"));

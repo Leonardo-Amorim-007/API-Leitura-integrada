@@ -11,7 +11,6 @@ public class Obra {
     private int id;
 
     private String titulo;
-    private String autor;
 
     @Enumerated(EnumType.STRING)
     private StatusLeitura statusLeitura;
@@ -35,15 +34,6 @@ public class Obra {
         this.titulo = titulo;
     }
 
-    public void setAutor(String autor) {
-        if (autor.isBlank())
-            throw new IllegalArgumentException("O autor não pode estar vazio!");
-        if (autor.length() > 100)
-            throw new IllegalArgumentException("O autor não pode ter mais de 100 caracteres!");
-
-        this.autor = autor;
-    }
-
     public void setStatusLeitura (StatusLeitura statusLeitura) {
         this.statusLeitura = statusLeitura;
     }
@@ -57,10 +47,11 @@ public class Obra {
 
     public void setFimLeitura (LocalDate date) {
         if (inicioLeitura == null)
-            throw new IllegalArgumentException("Não pode cadastrar fim de leitra antes da data de início de leitura!");
+            throw new IllegalArgumentException("Data de início Inválida para cadastrar a data de fim de leitura!");
         if (date.isBefore(inicioLeitura))
             throw new IllegalArgumentException("Não pode cadastrar a data de fim de leitura anterior ao início de leitura!");
 
+        statusLeitura = StatusLeitura.LIDO;
         fimLeitura = date;
     }
 
@@ -73,8 +64,6 @@ public class Obra {
 
     public String getTitulo () {return titulo;}
 
-    public String getAutor () {return autor;}
-
     public StatusLeitura getStatusLeitura () {return statusLeitura;}
 
     public LocalDate getInicioLeitura () {return inicioLeitura;}
@@ -82,4 +71,24 @@ public class Obra {
     public LocalDate getFimLeitura () {return fimLeitura;}
 
     public Formato getFormato () {return formato;}
+
+    // Funções
+    public boolean verificar () {
+        boolean verificador;
+
+        verificador = !(titulo.isBlank() && statusLeitura == null && !formato.verificar());
+
+        if (statusLeitura.equals(StatusLeitura.LENDO)) {
+            verificador = inicioLeitura != null && fimLeitura == null;
+        } else if (statusLeitura.equals(StatusLeitura.LIDO)) {
+                verificador = inicioLeitura != null && fimLeitura != null;
+        }
+
+        return verificador;
+    }
+
+    public boolean equals (Obra outraObra) {
+        return titulo.equalsIgnoreCase(outraObra.getTitulo()) &&
+                formato.getId() == outraObra.getFormato().getId();
+    }
 }

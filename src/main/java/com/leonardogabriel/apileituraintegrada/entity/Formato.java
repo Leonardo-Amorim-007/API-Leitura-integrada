@@ -26,7 +26,5 @@ public class Formato {
     public String getFormato () {return TextFunctions.LetraMaiscula(formato);}
 
     // Funções da entidade
-    public boolean verificar () {
-        return formato.isBlank();
-    }
+    public boolean verificar () {return !formato.isBlank();}
 }

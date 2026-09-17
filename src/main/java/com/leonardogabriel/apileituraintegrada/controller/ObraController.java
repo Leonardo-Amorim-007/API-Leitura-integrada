@@ -25,4 +25,14 @@ public class ObraController {
     public List<Obra> consultaObras () {
         return service.listarTodasObras();
     }
+
+    @GetMapping("{id}")
+    public Obra consultarObra (@PathVariable Integer id){
+        return service.listarObra(id);
+    }
+
+    @PutMapping
+    public Obra alterarObra (@RequestBody Obra obra) {
+        return service.alterarObra(obra);
+    }
 }
