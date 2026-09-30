@@ -1,7 +1,10 @@
 package com.leonardogabriel.apileituraintegrada.service;
 
 import com.leonardogabriel.apileituraintegrada.entity.*;
+import com.leonardogabriel.apileituraintegrada.enums.StatusLeitura;
 import com.leonardogabriel.apileituraintegrada.repository.ObraRepository;
+import com.leonardogabriel.apileituraintegrada.repository.filtro.ObraFiltros;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -21,8 +24,23 @@ public class ObraService {
         repository.save(obra);
     }
 
-    public List<Obra> listarTodasObras () {
-        return repository.findAll();
+    public List<Obra> listarTodasObras (
+            String titulo,
+            Integer idFormato,
+            StatusLeitura statusLeitura) {
+
+        Specification<Obra> filtro = Specification.unrestricted();
+
+        if (!(titulo ==  null || titulo.isBlank()))
+             filtro = filtro.and(ObraFiltros.contemTitulo(titulo));
+
+        if (!(idFormato == null || idFormato <= 0))
+            filtro = filtro.and(ObraFiltros.contemFormato(idFormato));
+
+        if (!(statusLeitura == null))
+            filtro = filtro.and(ObraFiltros.contemStatusLeitura(statusLeitura));
+
+        return repository.findAll(filtro);
     }
 
     public Obra listarObra(Integer id) {

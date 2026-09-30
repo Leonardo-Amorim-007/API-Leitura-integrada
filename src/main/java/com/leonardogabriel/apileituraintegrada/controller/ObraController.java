@@ -1,6 +1,7 @@
 package com.leonardogabriel.apileituraintegrada.controller;
 
 import com.leonardogabriel.apileituraintegrada.entity.Obra;
+import com.leonardogabriel.apileituraintegrada.enums.StatusLeitura;
 import com.leonardogabriel.apileituraintegrada.service.ObraService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,11 @@ public class ObraController {
     }
 
     @GetMapping
-    public List<Obra> consultaObras () {
-        return service.listarTodasObras();
+    public List<Obra> consultaObras (
+            @RequestParam(required=false) String titulo,
+            @RequestParam(required=false) Integer idFormato,
+            @RequestParam(required=false) StatusLeitura statusLeitura) {
+        return service.listarTodasObras(titulo, idFormato, statusLeitura);
     }
 
     @GetMapping("{id}")
